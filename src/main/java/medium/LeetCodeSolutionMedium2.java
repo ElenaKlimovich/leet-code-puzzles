@@ -1,3 +1,5 @@
+package medium;
+
 public class LeetCodeSolutionMedium2 {
 
     public static void main(String[] args) {

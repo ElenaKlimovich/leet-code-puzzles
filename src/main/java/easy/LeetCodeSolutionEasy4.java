@@ -1,3 +1,5 @@
+package easy;
+
 import org.w3c.dom.ranges.Range;
 
 import java.util.*;
