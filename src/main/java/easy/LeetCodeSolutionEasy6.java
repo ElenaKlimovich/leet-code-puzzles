@@ -22,7 +22,18 @@ public class LeetCodeSolutionEasy6 {
 //        merge(new int[]{1, 3, 5, 0, 0, 0}, 3, new int[]{2, 2, 6}, 3); // [1,2,2,3,5,6]
 //        merge(new int[]{4, 5, 6, 7, 0, 0, 0}, 4, new int[]{1, 2, 3}, 3);
 //        merge(new int[]{0}, 1, new int[]{1}, 1);
-        merge(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
+//        merge(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
+
+//        1,2,2,3,4,4,3
+        TreeNode node13 = new TreeNode(3);
+        TreeNode node14 = new TreeNode(4);
+        TreeNode node24 = new TreeNode(4);
+        TreeNode node23 = new TreeNode(3);
+        TreeNode node12 = new TreeNode(2, node13, node14);
+        TreeNode node22 = new TreeNode(2, node24, node23);
+        TreeNode node = new TreeNode(1, node12, node22);
+
+        System.out.println(isSymmetric(node)); // true
     }
 
     //  1.  https://leetcode.com/problems/two-sum
@@ -149,7 +160,40 @@ public class LeetCodeSolutionEasy6 {
         System.out.println(Arrays.toString(nums1));
     }
 
-//    https://leetcode.com/problems/symmetric-tree
+//  6.  https://leetcode.com/problems/symmetric-tree
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public static boolean isSymmetric(TreeNode root) {
+        return areNodesSymmetric(root, root);
+    }
+
+    static boolean areNodesSymmetric(TreeNode n1, TreeNode n2) {
+        if (n1 == null && n2 == null)
+            return true;
+        if (n1 == null || n2 == null)
+            return false;
+        return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
+    }
+
+
 //    https://leetcode.com/problems/valid-palindrome
 //    https://leetcode.com/problems/count-primes
 //    https://leetcode.com/problems/reverse-linked-list
