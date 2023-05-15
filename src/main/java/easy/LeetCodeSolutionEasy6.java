@@ -5,7 +5,8 @@ import java.util.*;
 public class LeetCodeSolutionEasy6 {
 
     public static void main(String[] args) {
-//        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9))); // [0,1]
+        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9))); // [0,1]
+
 //        System.out.println(isValid("()[]{}")); // true
 
 //        ListNode list14 = new ListNode(4);
@@ -25,19 +26,22 @@ public class LeetCodeSolutionEasy6 {
 //        merge(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
 
 //        1,2,2,3,4,4,3
-        TreeNode node13 = new TreeNode(3);
-        TreeNode node14 = new TreeNode(4);
-        TreeNode node24 = new TreeNode(4);
-        TreeNode node23 = new TreeNode(3);
-        TreeNode node12 = new TreeNode(2, node13, node14);
-        TreeNode node22 = new TreeNode(2, node24, node23);
-        TreeNode node = new TreeNode(1, node12, node22);
-
-        System.out.println(isSymmetric(node)); // true
+//        TreeNode node13 = new TreeNode(3);
+//        TreeNode node14 = new TreeNode(4);
+//        TreeNode node24 = new TreeNode(4);
+//        TreeNode node23 = new TreeNode(3);
+//        TreeNode node12 = new TreeNode(2, node13, node14);
+//        TreeNode node22 = new TreeNode(2, node24, node23);
+//        TreeNode node = new TreeNode(1, node12, node22);
+//
+//        System.out.println(isSymmetric(node)); // true
     }
 
+    //  7.  https://leetcode.com/problems/valid-palindrome
+
+
     //  1.  https://leetcode.com/problems/two-sum
-    public static int[] twoSum(int[] nums, int target) {
+    public static int[] twoSum0(int[] nums, int target) {
         int[] result = new int[2];
         int n = nums.length;
         // key = nums[i], value = index
@@ -50,6 +54,28 @@ public class LeetCodeSolutionEasy6 {
             }
             tempMap.put(nums[i], i);
         }
+        return result;
+    }
+
+    //  1.  https://leetcode.com/problems/two-sum
+    // method of 2 pointers - only for sorted array
+    public static int[] twoSum(int[] nums, int target) {
+        int[] result = new int[2];
+        int p1 = 0;
+        int p2 = nums.length-1;
+
+        while (p1 < p2) {
+            if (nums[p1] + nums[p2] == target) {
+                result[0] = p1;
+                result[1] = p2;
+                break;
+            }
+            else if (nums[p1] + nums[p2] > target)
+                p2--;
+            else
+                p1++;
+        }
+
         return result;
     }
 
@@ -81,7 +107,7 @@ public class LeetCodeSolutionEasy6 {
 
 
     //  3.  https://leetcode.com/problems/merge-two-sorted-lists
-    public static class ListNode {
+    private static class ListNode {
         int val;
         ListNode next;
 
@@ -193,8 +219,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-
-//    https://leetcode.com/problems/valid-palindrome
 //    https://leetcode.com/problems/count-primes
 //    https://leetcode.com/problems/reverse-linked-list
 //    https://leetcode.com/problems/implement-queue-using-stacks
