@@ -5,7 +5,7 @@ import java.util.*;
 public class LeetCodeSolutionEasy6 {
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9))); // [0,1]
+//        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9))); // [0,1]
 
 //        System.out.println(isValid("()[]{}")); // true
 
@@ -35,10 +35,37 @@ public class LeetCodeSolutionEasy6 {
 //        TreeNode node = new TreeNode(1, node12, node22);
 //
 //        System.out.println(isSymmetric(node)); // true
+
+//        System.out.println(isPalindrome("a roza upala na lapu Azora"));
+        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
     }
 
     //  7.  https://leetcode.com/problems/valid-palindrome
+    public static boolean isPalindrome(String s) {
+        System.out.println(s.length());
+        if (s.isEmpty())
+            return true;
 
+        int headPointer = 0;
+        int tailPointer = s.length() - 1;
+
+        while (headPointer <= tailPointer) {
+            char head = Character.toLowerCase(s.charAt(headPointer));
+            char tail = Character.toLowerCase(s.charAt(tailPointer));
+            if (!Character.isLetterOrDigit(head))
+                headPointer++;
+            else if (!Character.isLetterOrDigit(tail))
+                tailPointer--;
+            else {
+                if (head != tail)
+                    return false;
+                headPointer++;
+                tailPointer--;
+            }
+        }
+
+        return true;
+    }
 
     //  1.  https://leetcode.com/problems/two-sum
     public static int[] twoSum0(int[] nums, int target) {
@@ -62,15 +89,14 @@ public class LeetCodeSolutionEasy6 {
     public static int[] twoSum(int[] nums, int target) {
         int[] result = new int[2];
         int p1 = 0;
-        int p2 = nums.length-1;
+        int p2 = nums.length - 1;
 
         while (p1 < p2) {
             if (nums[p1] + nums[p2] == target) {
                 result[0] = p1;
                 result[1] = p2;
                 break;
-            }
-            else if (nums[p1] + nums[p2] > target)
+            } else if (nums[p1] + nums[p2] > target)
                 p2--;
             else
                 p1++;
