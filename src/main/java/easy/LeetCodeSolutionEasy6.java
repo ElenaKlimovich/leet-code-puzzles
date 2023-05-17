@@ -47,16 +47,15 @@ public class LeetCodeSolutionEasy6 {
             return 0;
 
         int count = 0;
-        boolean[] isPrime = new boolean[n];
-        Arrays.fill(isPrime, true);
-        isPrime[0]=false;
-        isPrime[1]=false;
+        boolean[] isNotPrime = new boolean[n];
+        isNotPrime[0]=true;
+        isNotPrime[1]=true;
         for(int i=2; i<n; i++) {
-            if(isPrime[i]) {
+            if(!isNotPrime[i]) {
                 count++;
 
                 for(int j=i; j<n; j += i) {
-                    isPrime[j] = false;
+                    isNotPrime[j] = true;
                 }
             }
         }
