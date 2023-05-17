@@ -1,5 +1,8 @@
 package medium;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LeetCodeSolutionMedium6 {
 
     public static void main(String[] args) {
@@ -14,7 +17,27 @@ public class LeetCodeSolutionMedium6 {
         ListNode node3 = new ListNode(3, node4);
         ListNode node2 = new ListNode(2, node3);
         ListNode node = new ListNode(1, node2);
-        swapPairs(node); //[1,2,3,4] -> [2,1,4,3]
+
+//        swapPairs(node); //[1,2,3,4] -> [2,1,4,3]
+
+        System.out.println(pairSum(node)); // [1,2,3,4] -> 5
+    }
+
+    // https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+    public static int pairSum(ListNode head) {
+        ListNode temp = head;
+        List<Integer> values = new ArrayList<>();
+        while (temp != null) {
+            values.add(temp.val);
+            temp = temp.next;
+        }
+        int maxSum = 0;
+        for (int i=0; i<values.size() / 2; i++) {
+            int tempMax = values.get(i) + values.get(values.size() - 1 - i);
+            if (maxSum < tempMax)
+                maxSum = tempMax;
+        }
+        return maxSum;
     }
 
     // https://leetcode.com/problems/swap-nodes-in-pairs/
