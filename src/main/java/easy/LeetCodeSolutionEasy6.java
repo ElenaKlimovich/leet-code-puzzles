@@ -37,7 +37,30 @@ public class LeetCodeSolutionEasy6 {
 //        System.out.println(isSymmetric(node)); // true
 
 //        System.out.println(isPalindrome("a roza upala na lapu Azora"));
-        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
+//        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
+        System.out.println(countPrimes(10)); // 4 (2, 3, 5, 7)
+    }
+
+    //  8. https://leetcode.com/problems/count-primes
+    public static int countPrimes(int n) {
+        if (n < 3)
+            return 0;
+
+        int count = 0;
+        boolean[] isPrime = new boolean[n];
+        Arrays.fill(isPrime, true);
+        isPrime[0]=false;
+        isPrime[1]=false;
+        for(int i=2; i<n; i++) {
+            if(isPrime[i]) {
+                count++;
+
+                for(int j=i; j<n; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        return count;
     }
 
     //  7.  https://leetcode.com/problems/valid-palindrome
@@ -245,7 +268,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//    https://leetcode.com/problems/count-primes
 //    https://leetcode.com/problems/reverse-linked-list
 //    https://leetcode.com/problems/implement-queue-using-stacks
 //    https://leetcode.com/problems/move-zeroes
