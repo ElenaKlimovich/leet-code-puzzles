@@ -1,7 +1,9 @@
 package medium;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LeetCodeSolutionMedium6 {
 
@@ -20,7 +22,39 @@ public class LeetCodeSolutionMedium6 {
 
 //        swapPairs(node); //[1,2,3,4] -> [2,1,4,3]
 
-        System.out.println(pairSum(node)); // [1,2,3,4] -> 5
+//        System.out.println(pairSum(node)); // [1,2,3,4] -> 5
+
+        System.out.println(findSmallestSetOfVertices(6, List.of(List.of(0, 1), List.of(0, 2), List.of(2, 5), List.of(3, 4), List.of(4, 2)))); // [0,3]
+    }
+
+    // https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/
+    public static List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
+        // I
+//        Set<Integer> froms = new HashSet<>();
+//        Set<Integer> tos = new HashSet<>();
+//
+//        for (int i = 0; i<edges.size(); i++) {
+//            froms.add(edges.get(i).get(0));
+//            tos.add(edges.get(i).get(1));
+//        }
+//        froms.removeAll(tos);
+//        return new ArrayList<>(froms);
+
+        // II
+        boolean[] incomingVer = new boolean[n];
+        List<Integer> res = new ArrayList<>();
+        for (List<Integer> edge : edges) {
+            int toVertix = edge.get(1);
+            if (!incomingVer[toVertix])
+                incomingVer[toVertix] = true;
+        }
+
+        for (int i = 0; i<n; i++) {
+            if(!incomingVer[i])
+                res.add(i);
+        }
+
+        return res;
     }
 
     // https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
@@ -32,7 +66,7 @@ public class LeetCodeSolutionMedium6 {
             temp = temp.next;
         }
         int maxSum = 0;
-        for (int i=0; i<values.size() / 2; i++) {
+        for (int i = 0; i < values.size() / 2; i++) {
             int tempMax = values.get(i) + values.get(values.size() - 1 - i);
             if (maxSum < tempMax)
                 maxSum = tempMax;
