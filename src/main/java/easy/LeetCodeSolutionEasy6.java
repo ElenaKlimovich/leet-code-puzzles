@@ -38,7 +38,28 @@ public class LeetCodeSolutionEasy6 {
 
 //        System.out.println(isPalindrome("a roza upala na lapu Azora"));
 //        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
-        System.out.println(countPrimes(10)); // 4 (2, 3, 5, 7)
+//        System.out.println(countPrimes(10)); // 4 (2, 3, 5, 7)
+
+        ListNode node5 = new ListNode(5);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode node = new ListNode(1, node2);
+
+        reverseList(node); //  5 4 3 2 1
+    }
+
+    //  9.  https://leetcode.com/problems/reverse-linked-list
+    public static ListNode reverseList(ListNode head) {
+        ListNode reversed = null;
+
+        while (head != null) {
+            ListNode tempNext = head.next;
+            head.next = reversed;
+            reversed = head;
+            head = tempNext;
+        }
+        return reversed;
     }
 
     //  8. https://leetcode.com/problems/count-primes
@@ -267,7 +288,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//    https://leetcode.com/problems/reverse-linked-list
 //    https://leetcode.com/problems/implement-queue-using-stacks
 //    https://leetcode.com/problems/move-zeroes
 //    https://leetcode.com/problems/intersection-of-two-arrays-ii
