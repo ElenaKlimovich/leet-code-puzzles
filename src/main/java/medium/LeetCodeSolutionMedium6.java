@@ -1,9 +1,6 @@
 package medium;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LeetCodeSolutionMedium6 {
 
@@ -24,8 +21,59 @@ public class LeetCodeSolutionMedium6 {
 
 //        System.out.println(pairSum(node)); // [1,2,3,4] -> 5
 
-        System.out.println(findSmallestSetOfVertices(6, List.of(List.of(0, 1), List.of(0, 2), List.of(2, 5), List.of(3, 4), List.of(4, 2)))); // [0,3]
+//        System.out.println(findSmallestSetOfVertices(6, List.of(List.of(0, 1), List.of(0, 2), List.of(2, 5), List.of(3, 4), List.of(4, 2)))); // [0,3]
+
+        System.out.println(isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {3, 0, 1}, {0, 2}})); // false
+        System.out.println(isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}})); // true
     }
+
+
+    // https://leetcode.com/problems/is-graph-bipartite/
+    public static boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int[] colors = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (colors[i] == 0) {
+//                if (!bfsColor(graph, i, colors))
+//                    return false;
+
+                Queue<Integer> queue = new LinkedList<>();
+                queue.add(i);
+                colors[i] = 1;
+                while (!queue.isEmpty()) {
+                    int current = queue.poll();
+                    for (int adjacent : graph[current]) {
+                        if (colors[adjacent] == colors[current]) {
+                            return false;
+                        } else if (colors[adjacent] == 0) {
+                            colors[adjacent] = -colors[current];
+                            queue.add(adjacent);
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean bfsColor(int[][] graph, int vertex, int[] colors) {
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(vertex);
+        colors[vertex] = 1;
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            for (int adjacent : graph[current]) {
+                if (colors[adjacent] == colors[current]) {
+                    return false;
+                } else if (colors[adjacent] == 0) {
+                    colors[adjacent] = -colors[current];
+                    queue.add(adjacent);
+                }
+            }
+        }
+        return true;
+    }
+
 
     // https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/
     public static List<Integer> findSmallestSetOfVertices(int n, List<List<Integer>> edges) {
@@ -49,8 +97,8 @@ public class LeetCodeSolutionMedium6 {
                 incomingVer[toVertix] = true;
         }
 
-        for (int i = 0; i<n; i++) {
-            if(!incomingVer[i])
+        for (int i = 0; i < n; i++) {
+            if (!incomingVer[i])
                 res.add(i);
         }
 
