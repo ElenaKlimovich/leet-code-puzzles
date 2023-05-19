@@ -47,6 +47,47 @@ public class LeetCodeSolutionEasy6 {
         ListNode node = new ListNode(1, node2);
 
         reverseList(node); //  5 4 3 2 1
+
+        MyQueue obj = new MyQueue();
+        obj.push(1);
+        int param_2 = obj.pop();
+        int param_3 = obj.peek();
+        boolean param_4 = obj.empty();
+    }
+
+    // 10. https://leetcode.com/problems/implement-queue-using-stacks
+    static class MyQueue {
+
+        Stack<Integer> inPuts = new Stack<>();
+        Stack<Integer> outPuts = new Stack<>();
+
+        public MyQueue() {
+
+        }
+
+        public void push(int x) {
+            inPuts.push(x);
+        }
+
+        public int pop() {
+            if (outPuts.isEmpty()) {
+                while (!inPuts.isEmpty())
+                    outPuts.push(inPuts.pop());
+            }
+            return outPuts.pop();
+        }
+
+        public int peek() {
+            if (outPuts.isEmpty()) {
+                while (!inPuts.isEmpty())
+                    outPuts.push(inPuts.pop());
+            }
+            return outPuts.peek();
+        }
+
+        public boolean empty() {
+            return inPuts.isEmpty() && outPuts.isEmpty();
+        }
     }
 
     //  9.  https://leetcode.com/problems/reverse-linked-list
@@ -69,13 +110,13 @@ public class LeetCodeSolutionEasy6 {
 
         int count = 0;
         boolean[] isNotPrime = new boolean[n];
-        isNotPrime[0]=true;
-        isNotPrime[1]=true;
-        for(int i=2; i<n; i++) {
-            if(!isNotPrime[i]) {
+        isNotPrime[0] = true;
+        isNotPrime[1] = true;
+        for (int i = 2; i < n; i++) {
+            if (!isNotPrime[i]) {
                 count++;
 
-                for(int j=i; j<n; j += i) {
+                for (int j = i; j < n; j += i) {
                     isNotPrime[j] = true;
                 }
             }
@@ -288,10 +329,9 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//    https://leetcode.com/problems/implement-queue-using-stacks
-//    https://leetcode.com/problems/move-zeroes
-//    https://leetcode.com/problems/intersection-of-two-arrays-ii
-//    https://leetcode.com/problems/string-compression
-//    https://leetcode.com/problems/number-of-recent-calls
+//   11. https://leetcode.com/problems/move-zeroes
+//   12. https://leetcode.com/problems/intersection-of-two-arrays-ii
+//   13. https://leetcode.com/problems/string-compression
+//   14. https://leetcode.com/problems/number-of-recent-calls
 
 }
