@@ -40,19 +40,50 @@ public class LeetCodeSolutionEasy6 {
 //        System.out.println(isPalindrome("A man, a plan, a canal: Panama"));
 //        System.out.println(countPrimes(10)); // 4 (2, 3, 5, 7)
 
-        ListNode node5 = new ListNode(5);
-        ListNode node4 = new ListNode(4, node5);
-        ListNode node3 = new ListNode(3, node4);
-        ListNode node2 = new ListNode(2, node3);
-        ListNode node = new ListNode(1, node2);
+//        ListNode node5 = new ListNode(5);
+//        ListNode node4 = new ListNode(4, node5);
+//        ListNode node3 = new ListNode(3, node4);
+//        ListNode node2 = new ListNode(2, node3);
+//        ListNode node = new ListNode(1, node2);
 
-        reverseList(node); //  5 4 3 2 1
+//        reverseList(node); //  5 4 3 2 1
+//
+//        MyQueue obj = new MyQueue();
+//        obj.push(1);
+//        int param_2 = obj.pop();
+//        int param_3 = obj.peek();
+//        boolean param_4 = obj.empty();
 
-        MyQueue obj = new MyQueue();
-        obj.push(1);
-        int param_2 = obj.pop();
-        int param_3 = obj.peek();
-        boolean param_4 = obj.empty();
+        moveZeroes(new int[]{0, 1, 0, 3, 12}); //  [1,3,12,0,0]
+
+    }
+
+    //   11. https://leetcode.com/problems/move-zeroes
+    public static void moveZeroes(int[] nums) {
+
+        // II
+        int p = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                if (p != i) {
+                    nums[p] = nums[i];
+                    nums[i] = 0;
+                }
+                p++;
+            }
+        }
+
+        // I
+//        int p = 0;
+//        for (int i = 0; i < nums.length; i++) {
+//            if (nums[i] != 0) {
+//                nums[p++] = nums[i];
+//            }
+//        }
+//        for (int i = p; i < nums.length; i++) {
+//            nums[i] = 0;
+//        }
+        System.out.println(Arrays.toString(nums));
     }
 
     // 10. https://leetcode.com/problems/implement-queue-using-stacks
@@ -329,7 +360,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//   11. https://leetcode.com/problems/move-zeroes
 //   12. https://leetcode.com/problems/intersection-of-two-arrays-ii
 //   13. https://leetcode.com/problems/string-compression
 //   14. https://leetcode.com/problems/number-of-recent-calls
