@@ -23,10 +23,57 @@ public class LeetCodeSolutionMedium6 {
 
 //        System.out.println(findSmallestSetOfVertices(6, List.of(List.of(0, 1), List.of(0, 2), List.of(2, 5), List.of(3, 4), List.of(4, 2)))); // [0,3]
 
-        System.out.println(isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {3, 0, 1}, {0, 2}})); // false
-        System.out.println(isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}})); // true
+//        System.out.println(isBipartite(new int[][]{{1, 2, 3}, {0, 2}, {3, 0, 1}, {0, 2}})); // false
+//        System.out.println(isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}})); // true
+//        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 3, 2, 2}, 2))); // [1, 2]
+
+        System.out.println(topKFrequent(new String[]{"i","love","leetcode","i","love","coding"}, 2)); // ["i","love"]
+        System.out.println(topKFrequent(new String[]{"the","day","is","sunny","the","the","the","sunny","is","is"}, 4)); // ["the","is","sunny","day"]
     }
 
+    // https://leetcode.com/problems/top-k-frequent-words/
+    public static List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> frMap = new HashMap<>();
+
+        for(String w: words) {
+            frMap.merge(w, 1, (Integer::sum));
+        }
+
+        PriorityQueue<Map.Entry<String, Integer>> pq =
+                new PriorityQueue<>((v1, v2) -> {
+                    if (v2.getValue().equals(v1.getValue()))
+                        return v1.getKey().compareTo(v2.getKey());
+                    return v2.getValue() - v1.getValue();
+                });
+        pq.addAll(frMap.entrySet());
+
+        List<String> res = new ArrayList<>();
+        while(k-- > 0)
+            res.add(pq.poll().getKey());
+
+        return res;
+    }
+
+    // https://leetcode.com/problems/top-k-frequent-elements/
+    public static int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> frMap = new HashMap<>();
+
+        for (int number : nums) {
+            frMap.merge(number, 1, (Integer::sum));
+        }
+
+        PriorityQueue<Map.Entry<Integer, Integer>> priorityQueue =
+                new PriorityQueue<>((v1, v2) -> v2.getValue() - v1.getValue());
+
+        priorityQueue.addAll(frMap.entrySet());
+
+        int[] res = new int[k];
+        for (int j = 0; j<k; j++) {
+            res[j] = priorityQueue.poll().getKey();
+        }
+
+        return res;
+    }
 
     // https://leetcode.com/problems/is-graph-bipartite/
     public static boolean isBipartite(int[][] graph) {
