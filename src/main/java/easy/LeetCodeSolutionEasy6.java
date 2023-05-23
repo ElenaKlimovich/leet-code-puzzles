@@ -1,6 +1,7 @@
 package easy;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LeetCodeSolutionEasy6 {
 
@@ -54,8 +55,27 @@ public class LeetCodeSolutionEasy6 {
 //        int param_3 = obj.peek();
 //        boolean param_4 = obj.empty();
 
-        moveZeroes(new int[]{0, 1, 0, 3, 12}); //  [1,3,12,0,0]
+//        moveZeroes(new int[]{0, 1, 0, 3, 12}); //  [1,3,12,0,0]
 
+        System.out.println(Arrays.toString(intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}))); //[2,2]
+        System.out.println(Arrays.toString(intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}))); //[4,9]
+
+    }
+
+    //   12. https://leetcode.com/problems/intersection-of-two-arrays-ii
+    public static int[] intersect(int[] nums1, int[] nums2) {
+
+        List<Integer> n1 = Arrays.stream(nums1).boxed().collect(Collectors.toList());
+        List<Integer> res = new ArrayList<>();
+
+        for (int n : nums2) {
+            if (n1.contains(n)) {
+                res.add(n);
+                n1.remove((Integer) n);
+            }
+        }
+
+        return res.stream().mapToInt(Integer::intValue).toArray();
     }
 
     //   11. https://leetcode.com/problems/move-zeroes
@@ -360,7 +380,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//   12. https://leetcode.com/problems/intersection-of-two-arrays-ii
 //   13. https://leetcode.com/problems/string-compression
 //   14. https://leetcode.com/problems/number-of-recent-calls
 
