@@ -23,10 +23,39 @@ public class LeetCodeSolutionEasy5 {
 
 //        arraySign(new int[] {7,36,96,70,85,23,5,18,4,12,89,92,9,30,53,14,96,32,13,43,37,60,75,7,83,68,20,8,-24,-80,-27,-92,-96,-20,-16,-52,-49,-38});
 
-        System.out.println(findDifference(new int[] {1,2,3}, new int[] {2,4,6})); // [[1,3],[4,6]]
+        System.out.println(findDifference(new int[]{1, 2, 3}, new int[]{2, 4, 6})); // [[1,3],[4,6]]
     }
 
-    // https://leetcode.com/problems/find-the-difference-of-two-arrays/
+    // https://leetcode.com/problems/kth-largest-element-in-a-stream/
+
+    /**
+     * Your KthLargest object will be instantiated and called as such:
+     * KthLargest obj = new KthLargest(k, nums);
+     * int param_1 = obj.add(val);
+     */
+
+    class KthLargest {
+
+        int n = 0;
+        Queue<Integer> q;
+
+        public KthLargest(int k, int[] nums) {
+            this.n = k;
+            q = new PriorityQueue<>();
+            for (int num : nums)
+                this.add(num);
+        }
+
+        public int add(int val) {
+            q.add(val);
+            if (q.size() > n)
+                q.remove();
+
+            return q.peek();
+        }
+    }
+
+    // https://leetcode.com/problems/find-the-difference-of-two-arra
     public static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
 
         Set<Integer> set1 = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
@@ -48,8 +77,8 @@ public class LeetCodeSolutionEasy5 {
     // https://leetcode.com/problems/sign-of-the-product-of-an-array/
     public static int arraySign(int[] nums) {
         int n = 1;
-        for(int i=0; i< nums.length; i++) {
-            if(nums[i] == 0)
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0)
                 return 0;
             if (nums[i] < 0)
                 n *= -1;
