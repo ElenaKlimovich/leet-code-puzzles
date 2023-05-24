@@ -57,9 +57,34 @@ public class LeetCodeSolutionEasy6 {
 
 //        moveZeroes(new int[]{0, 1, 0, 3, 12}); //  [1,3,12,0,0]
 
-        System.out.println(Arrays.toString(intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}))); //[2,2]
-        System.out.println(Arrays.toString(intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}))); //[4,9]
+//        System.out.println(Arrays.toString(intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}))); //[2,2]
+//        System.out.println(Arrays.toString(intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}))); //[4,9]
 
+        System.out.println(compress(new char[]{'a', 'a', 'b', 'b', 'c', 'c', 'c'})); // 6 - a2b2c3
+        System.out.println(compress(new char[]{'b', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'})); // 4 - ba12
+
+    }
+
+    //   13. https://leetcode.com/problems/string-compression
+    public static int compress(char[] chars) {
+        int pointer = 0;
+        int i = 0;
+        while (i < chars.length) {
+            int counterOfSameLetters = 0;
+            char current = chars[i];
+            while (i < chars.length && current == chars[i++]) {
+                counterOfSameLetters++;
+            }
+            chars[pointer++] = current;
+            String nStr = String.valueOf(counterOfSameLetters);
+            if (nStr.length() > 1) {
+                int k = 0;
+                while (k < nStr.length()) {
+                    chars[pointer++] = nStr.charAt(k++);
+                }
+            }
+        }
+        return pointer;
     }
 
     //   12. https://leetcode.com/problems/intersection-of-two-arrays-ii
@@ -380,7 +405,6 @@ public class LeetCodeSolutionEasy6 {
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
 
-//   13. https://leetcode.com/problems/string-compression
 //   14. https://leetcode.com/problems/number-of-recent-calls
 
 }
