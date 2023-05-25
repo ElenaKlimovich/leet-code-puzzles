@@ -65,6 +65,22 @@ public class LeetCodeSolutionEasy6 {
 
     }
 
+    //   14. https://leetcode.com/problems/number-of-recent-calls
+    class RecentCounter {
+        Queue<Integer> q;
+
+        public RecentCounter() {
+            q = new LinkedList<>();
+        }
+
+        public int ping(int t) {
+            while (!q.isEmpty() && t - 3000 > q.peek())
+                q.poll();
+            q.add(t);
+            return q.size();
+        }
+    }
+
     //   13. https://leetcode.com/problems/string-compression
     public static int compress(char[] chars) {
         int pointer = 0;
@@ -404,7 +420,5 @@ public class LeetCodeSolutionEasy6 {
             return false;
         return (n1.val == n2.val && areNodesSymmetric(n1.left, n2.right) && areNodesSymmetric(n2.left, n1.right));
     }
-
-//   14. https://leetcode.com/problems/number-of-recent-calls
 
 }
