@@ -1,10 +1,33 @@
 package medium;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LeetCodeSolutionMedium7 {
 
     public static void main(String[] args) {
-
+        System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
     }
+
+
+    //  2. https://leetcode.com/problems/longest-substring-without-repeating-characters
+    public static int lengthOfLongestSubstring(String s) {
+        int max = 0;
+        int i = 0;
+        int j = 0;
+        Set<Character> window = new HashSet<>();
+
+        while (j < s.length()) {
+            if (!window.contains(s.charAt(j))) {
+                window.add(s.charAt(j++));
+                max = Math.max(max, window.size());
+            }
+            else
+                window.remove(s.charAt(i++));
+        }
+        return max;
+    }
+
 
     //  1. https://leetcode.com/problems/add-two-numbers
     private static class ListNode {
@@ -51,7 +74,6 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
-//    https://leetcode.com/problems/longest-substring-without-repeating-characters
 //    https://leetcode.com/problems/longest-palindromic-substring
 //    https://leetcode.com/problems/3sum
 //    https://leetcode.com/problems/3sum-closest
