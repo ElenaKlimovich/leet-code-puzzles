@@ -65,6 +65,67 @@ public class LeetCodeSolutionEasy6 {
 
     }
 
+    // https://leetcode.com/problems/design-hashset
+    // II
+    class MyHashSet {
+
+        int size = 10000;
+        List<List<Integer>> mySet;
+        public MyHashSet() {
+            mySet = new ArrayList<>(size);
+            for(int i=0; i<size; i++) {
+                mySet.add(null);
+            }
+        }
+
+        public void add(int key) {
+            int index = key%size;
+            List<Integer> inner = mySet.get(index);
+            if(inner == null) {
+                inner = new LinkedList<>();
+                inner.add(key);
+                mySet.set(index, inner);
+            }
+            else {
+                if(!inner.contains(key))
+                    inner.add(key);
+            }
+        }
+
+        public void remove(int key) {
+            int index = key%size;
+            List<Integer> inner = mySet.get(index);
+            if(inner != null)
+                inner.remove(Integer.valueOf(key));
+        }
+
+        public boolean contains(int key) {
+            int index = key%size;
+            List<Integer> inner = mySet.get(index);
+            return inner != null && inner.contains(key);
+        }
+    }
+
+    // I
+//    class MyHashSet {
+//
+//        boolean[] mySet;
+//        public MyHashSet() {
+//            mySet = new boolean[1000001];
+//        }
+//
+//        public void add(int key) {
+//            mySet[key] = true;
+//        }
+//
+//        public void remove(int key) {
+//            mySet[key] = false;
+//        }
+//
+//        public boolean contains(int key) {
+//            return mySet[key];
+//        }
+//    }
 
     // https://leetcode.com/problems/design-parking-system/
     class ParkingSystem {
