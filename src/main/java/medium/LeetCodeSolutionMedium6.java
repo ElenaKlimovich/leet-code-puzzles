@@ -27,8 +27,47 @@ public class LeetCodeSolutionMedium6 {
 //        System.out.println(isBipartite(new int[][]{{1, 3}, {0, 2}, {1, 3}, {0, 2}})); // true
 //        System.out.println(Arrays.toString(topKFrequent(new int[]{1, 1, 1, 3, 2, 2}, 2))); // [1, 2]
 
-        System.out.println(topKFrequent(new String[]{"i","love","leetcode","i","love","coding"}, 2)); // ["i","love"]
-        System.out.println(topKFrequent(new String[]{"the","day","is","sunny","the","the","the","sunny","is","is"}, 4)); // ["the","is","sunny","day"]
+//        System.out.println(topKFrequent(new String[]{"i","love","leetcode","i","love","coding"}, 2)); // ["i","love"]
+//        System.out.println(topKFrequent(new String[]{"the","day","is","sunny","the","the","the","sunny","is","is"}, 4)); // ["the","is","sunny","day"]
+
+        System.out.println(maximumDetonation(new int[][]{{1,1,5},{10, 10, 5}})); // 1
+    }
+
+    // https://leetcode.com/problems/detonate-the-maximum-bombs
+    public static int maximumDetonation(int[][] bombs) {
+        int max = 0;
+        for (int i=0; i<bombs.length; i++) {
+            max = Math.max(max, findMaxCurrent(bombs, i));
+        }
+        return max;
+    }
+
+    private static int findMaxCurrent(int[][] bombs, int i) {
+        int n = bombs.length;
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] tested = new boolean[n];
+        tested[i] = true;
+        q.offer(i);
+
+        int res = 1;
+
+        while(!q.isEmpty()) {
+            int curr = q.poll();
+            for(int j=0; j<n; j++) {
+                if(!tested[j] && isInside(bombs[curr], bombs[j])) {
+                    tested[j] = true;
+                    q.offer(j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    private static boolean isInside(int[] b1, int[] b2) {
+        long r2 = (long)Math.pow(b1[2], 2);
+        long dist2 = (long)Math.pow(b1[0] - b2[0], 2) + (long)Math.pow(b1[1] - b2[1], 2);
+        return dist2 <= r2;
     }
 
     // https://leetcode.com/problems/top-k-frequent-words/
