@@ -9,6 +9,29 @@ public class LeetCodeSolutionMedium7 {
         System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
     }
 
+    //  3. https://leetcode.com/problems/longest-palindromic-substring
+    public String longestPalindrome(String s) {
+        String res = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            String oddStr = expandWindow(s, i, i);
+            if (res.length() < oddStr.length())
+                res = oddStr;
+
+            String evenStr = expandWindow(s, i, i + 1);
+            if (res.length() < evenStr.length())
+                res = evenStr;
+        }
+        return res;
+    }
+
+    private String expandWindow(String s, int start, int end) {
+        while (start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+        return s.substring(start + 1, end);
+    }
 
     //  2. https://leetcode.com/problems/longest-substring-without-repeating-characters
     public static int lengthOfLongestSubstring(String s) {
@@ -21,8 +44,7 @@ public class LeetCodeSolutionMedium7 {
             if (!window.contains(s.charAt(j))) {
                 window.add(s.charAt(j++));
                 max = Math.max(max, window.size());
-            }
-            else
+            } else
                 window.remove(s.charAt(i++));
         }
         return max;
@@ -55,7 +77,7 @@ public class LeetCodeSolutionMedium7 {
         while (l1 != null || l2 != null || temp > 0) {
             int currentSum = 0;
             if (l1 != null) {
-               currentSum += l1.val;
+                currentSum += l1.val;
                 l1 = l1.next;
             }
             if (l2 != null) {
@@ -64,9 +86,9 @@ public class LeetCodeSolutionMedium7 {
             }
 
             currentSum += temp;
-            temp = currentSum/10;
+            temp = currentSum / 10;
 
-            pointer.next = new ListNode(currentSum%10);
+            pointer.next = new ListNode(currentSum % 10);
             pointer = pointer.next;
         }
 
@@ -74,7 +96,6 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
-//    https://leetcode.com/problems/longest-palindromic-substring
 //    https://leetcode.com/problems/3sum
 //    https://leetcode.com/problems/3sum-closest
 //    https://leetcode.com/problems/remove-nth-node-from-end-of-list
