@@ -30,13 +30,36 @@ public class LeetCodeSolutionMedium6 {
 //        System.out.println(topKFrequent(new String[]{"i","love","leetcode","i","love","coding"}, 2)); // ["i","love"]
 //        System.out.println(topKFrequent(new String[]{"the","day","is","sunny","the","the","the","sunny","is","is"}, 4)); // ["the","is","sunny","day"]
 
-        System.out.println(maximumDetonation(new int[][]{{1,1,5},{10, 10, 5}})); // 1
+//        System.out.println(maximumDetonation(new int[][]{{1, 1, 5}, {10, 10, 5}})); // 1
+
+//        System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}})); // 2
+//        System.out.println(equalPairs(new int[][]{{3,1,2,2}, {1,4,4,4}, {2,4,2,2}, {2,5,2,2}})); // 3
+        System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}})); // 3
+    }
+
+    // https://leetcode.com/problems/equal-row-and-column-pairs/
+    public static int equalPairs(int[][] grid) {
+        int res = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid.length; c++) {
+                boolean isEq = true;
+                for (int i = 0; i < grid.length; i++) {
+                    if (grid[r][i] != grid[i][c]) {
+                        isEq = false;
+                        break;
+                    }
+                }
+                if (isEq)
+                    res++;
+            }
+        }
+        return res;
     }
 
     // https://leetcode.com/problems/detonate-the-maximum-bombs
     public static int maximumDetonation(int[][] bombs) {
         int max = 0;
-        for (int i=0; i<bombs.length; i++) {
+        for (int i = 0; i < bombs.length; i++) {
             max = Math.max(max, findMaxCurrent(bombs, i));
         }
         return max;
@@ -51,10 +74,10 @@ public class LeetCodeSolutionMedium6 {
 
         int res = 1;
 
-        while(!q.isEmpty()) {
+        while (!q.isEmpty()) {
             int curr = q.poll();
-            for(int j=0; j<n; j++) {
-                if(!tested[j] && isInside(bombs[curr], bombs[j])) {
+            for (int j = 0; j < n; j++) {
+                if (!tested[j] && isInside(bombs[curr], bombs[j])) {
                     tested[j] = true;
                     q.offer(j);
                     res++;
@@ -65,8 +88,8 @@ public class LeetCodeSolutionMedium6 {
     }
 
     private static boolean isInside(int[] b1, int[] b2) {
-        long r2 = (long)Math.pow(b1[2], 2);
-        long dist2 = (long)Math.pow(b1[0] - b2[0], 2) + (long)Math.pow(b1[1] - b2[1], 2);
+        long r2 = (long) Math.pow(b1[2], 2);
+        long dist2 = (long) Math.pow(b1[0] - b2[0], 2) + (long) Math.pow(b1[1] - b2[1], 2);
         return dist2 <= r2;
     }
 
@@ -74,7 +97,7 @@ public class LeetCodeSolutionMedium6 {
     public static List<String> topKFrequent(String[] words, int k) {
         Map<String, Integer> frMap = new HashMap<>();
 
-        for(String w: words) {
+        for (String w : words) {
             frMap.merge(w, 1, (Integer::sum));
         }
 
@@ -87,7 +110,7 @@ public class LeetCodeSolutionMedium6 {
         pq.addAll(frMap.entrySet());
 
         List<String> res = new ArrayList<>();
-        while(k-- > 0)
+        while (k-- > 0)
             res.add(pq.poll().getKey());
 
         return res;
@@ -107,7 +130,7 @@ public class LeetCodeSolutionMedium6 {
         priorityQueue.addAll(frMap.entrySet());
 
         int[] res = new int[k];
-        for (int j = 0; j<k; j++) {
+        for (int j = 0; j < k; j++) {
             res[j] = priorityQueue.poll().getKey();
         }
 
