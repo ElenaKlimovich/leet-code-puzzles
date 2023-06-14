@@ -26,7 +26,47 @@ public class LeetCodeSolutionEasy5 {
         System.out.println(findDifference(new int[]{1, 2, 3}, new int[]{2, 4, 6})); // [[1,3],[4,6]]
     }
 
-    // https://leetcode.com/problems/kth-largest-element-in-a-stream/
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    // https://leetcode.com/problems/minimum-absolute-difference-in-bst/
+    int res = Integer.MAX_VALUE;
+    Integer prev;
+
+    public int getMinimumDifference(TreeNode root) {
+        if (root == null)
+            return res;
+
+        getMinimumDifference(root.left);
+
+        if (prev != null) {
+            res = Math.min(res, root.val - prev);
+        }
+
+        prev = root.val;
+
+        getMinimumDifference(root.right);
+        return res;
+    }
+
+
+// https://leetcode.com/problems/kth-largest-element-in-a-stream/
 
     /**
      * Your KthLargest object will be instantiated and called as such:
@@ -53,6 +93,7 @@ public class LeetCodeSolutionEasy5 {
 
             return q.peek();
         }
+
     }
 
     // https://leetcode.com/problems/find-the-difference-of-two-arra
