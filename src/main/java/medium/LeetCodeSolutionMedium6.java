@@ -1,7 +1,5 @@
 package medium;
 
-import easy.LeetCodeSolutionEasy5;
-
 import java.util.*;
 
 public class LeetCodeSolutionMedium6 {
