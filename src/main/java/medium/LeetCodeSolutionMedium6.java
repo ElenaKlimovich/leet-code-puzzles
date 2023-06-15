@@ -1,5 +1,7 @@
 package medium;
 
+import easy.LeetCodeSolutionEasy5;
+
 import java.util.*;
 
 public class LeetCodeSolutionMedium6 {
@@ -36,6 +38,63 @@ public class LeetCodeSolutionMedium6 {
 //        System.out.println(equalPairs(new int[][]{{3,1,2,2}, {1,4,4,4}, {2,4,2,2}, {2,5,2,2}})); // 3
         System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}})); // 3
     }
+
+    // https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public int maxLevelSum(TreeNode root) {
+
+        int levelResult = 0;
+        int currentLevel = 0;
+        int tempMaxSum = Integer.MIN_VALUE;
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root);
+
+        while (!nodes.isEmpty()) {
+            currentLevel++;
+
+            int size = nodes.size();
+            int currentSum = 0;
+
+            for (int i = 0; i < size; i++) {
+                TreeNode currentNode = nodes.poll();
+                currentSum += currentNode.val;
+
+                TreeNode left = currentNode.left;
+                if (left != null)
+                    nodes.add(left);
+
+                TreeNode right = currentNode.right;
+                if (right != null)
+                    nodes.add(right);
+            }
+
+            if (tempMaxSum < currentSum) {
+                tempMaxSum = currentSum;
+                levelResult = currentLevel;
+            }
+        }
+
+        return levelResult;
+    }
+
 
     // https://leetcode.com/problems/equal-row-and-column-pairs/
     public static int equalPairs(int[][] grid) {
