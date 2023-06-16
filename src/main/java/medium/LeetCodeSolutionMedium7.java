@@ -1,12 +1,28 @@
 package medium;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class LeetCodeSolutionMedium7 {
 
     public static void main(String[] args) {
         System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
+    }
+
+    //  4.  https://leetcode.com/problems/validate-binary-search-tree
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root, null, null);
+    }
+
+    private boolean isValid(TreeNode root, Integer min, Integer max) {
+        if (root == null)
+            return true;
+        int rootVal = root.val;
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        return (min == null || rootVal > min)
+                && (max == null || rootVal < max)
+                && isValid(left, min, rootVal)
+                && isValid(right, rootVal, max);
     }
 
     //  3. https://leetcode.com/problems/longest-palindromic-substring
@@ -107,7 +123,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/merge-intervals
 //    https://leetcode.com/problems/spiral-matrix-ii
 //    https://leetcode.com/problems/simplify-path
-//    https://leetcode.com/problems/validate-binary-search-tree
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
 //    https://leetcode.com/problems/summary-ranges
