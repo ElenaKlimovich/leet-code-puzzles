@@ -5,7 +5,53 @@ import java.util.*;
 public class LeetCodeSolutionMedium7 {
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
+//        System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
+
+        int[][] matrix = generateMatrix(3);
+        for (int i[] : matrix) {
+            for (int j : i)
+                System.out.print(j + " ");
+            System.out.println();
+        }
+    }
+
+    //  5.  https://leetcode.com/problems/spiral-matrix-ii
+    public static int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int left = 0;
+        int top = 0;
+        int right = n - 1;
+        int bottom = n - 1;
+        int k = 1;
+
+        while (left <= right && top <= bottom) {
+
+            for (int j = left; j <= right; j++, k++) {
+                res[top][j] = k;
+            }
+            top++;
+
+            for (int i = top; i <= bottom; i++, k++) {
+                res[i][right] = k;
+            }
+            right--;
+
+            if (top <= bottom) {
+                for (int j = right; j >= left; j--, k++) {
+                    res[bottom][j] = k;
+                }
+                bottom--;
+            }
+
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--, k++) {
+                    res[i][left] = k;
+                }
+                left++;
+            }
+        }
+
+        return res;
     }
 
     //  4.  https://leetcode.com/problems/validate-binary-search-tree
@@ -121,7 +167,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/rotate-image
 //    https://leetcode.com/problems/group-anagrams
 //    https://leetcode.com/problems/merge-intervals
-//    https://leetcode.com/problems/spiral-matrix-ii
 //    https://leetcode.com/problems/simplify-path
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
