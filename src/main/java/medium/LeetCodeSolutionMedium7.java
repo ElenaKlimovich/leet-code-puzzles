@@ -15,6 +15,29 @@ public class LeetCodeSolutionMedium7 {
         }
     }
 
+    //  6.  https://leetcode.com/problems/3sum
+    public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        Set<List<Integer>> res = new HashSet<>();
+        for (int i = 0; i < nums.length - 2; i++) {
+            int sum = 0 - nums[i];
+            int p1 = i + 1;
+            int p2 = nums.length - 1;
+            while (p1 < p2) {
+                int sum2 = nums[p1] + nums[p2];
+                if (sum2 == sum) {
+                    res.add(List.of(nums[i], nums[p1], nums[p2]));
+                    p1++;
+                } else if (sum2 < sum) {
+                    p1++;
+                } else
+                    p2--;
+            }
+        }
+
+        return new ArrayList<>(res);
+    }
+
     //  5.  https://leetcode.com/problems/spiral-matrix-ii
     public static int[][] generateMatrix(int n) {
         int[][] res = new int[n][n];
@@ -158,7 +181,6 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
-//    https://leetcode.com/problems/3sum
 //    https://leetcode.com/problems/3sum-closest
 //    https://leetcode.com/problems/remove-nth-node-from-end-of-list
 //    https://leetcode.com/problems/generate-parentheses
