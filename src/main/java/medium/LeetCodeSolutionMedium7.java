@@ -15,8 +15,7 @@ public class LeetCodeSolutionMedium7 {
 //        }
 
         System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1)); // 2
-                                                // -4, -1, 1, 2
-//        System.out.println(threeSumClosest(new int[]{-2, 1, 3, 7}, 4));
+
     }
 
     //  7. https://leetcode.com/problems/3sum-closest
