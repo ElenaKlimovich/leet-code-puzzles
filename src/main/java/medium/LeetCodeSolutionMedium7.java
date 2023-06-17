@@ -7,13 +7,49 @@ public class LeetCodeSolutionMedium7 {
     public static void main(String[] args) {
 //        System.out.println(lengthOfLongestSubstring("abcabcbd")); //3
 
-        int[][] matrix = generateMatrix(3);
-        for (int i[] : matrix) {
-            for (int j : i)
-                System.out.print(j + " ");
-            System.out.println();
-        }
+//        int[][] matrix = generateMatrix(3);
+//        for (int i[] : matrix) {
+//            for (int j : i)
+//                System.out.print(j + " ");
+//            System.out.println();
+//        }
+
+        System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1)); // 2
+                                                // -4, -1, 1, 2
+//        System.out.println(threeSumClosest(new int[]{-2, 1, 3, 7}, 4));
     }
+
+    //  7. https://leetcode.com/problems/3sum-closest
+    public static int threeSumClosest(int[] nums, int target) {
+
+        Arrays.sort(nums);
+        int res = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            int p1 = i + 1;
+            int p2 = nums.length - 1;
+            while (p1 < p2) {
+                int sum = nums[i] + nums[p1] + nums[p2];
+                if (sum == target) {
+                    return nums[i] + nums[p1] + nums[p2];
+                } else if (sum < target) {
+                    p1++;
+                } else {
+                    p2--;
+                }
+
+                int diff = Math.abs(target - sum);
+                if (min > diff) {
+                    min = diff;
+                    res = sum;
+                }
+            }
+        }
+
+        return res;
+    }
+
 
     //  6.  https://leetcode.com/problems/3sum
     public List<List<Integer>> threeSum(int[] nums) {
@@ -181,7 +217,6 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
-//    https://leetcode.com/problems/3sum-closest
 //    https://leetcode.com/problems/remove-nth-node-from-end-of-list
 //    https://leetcode.com/problems/generate-parentheses
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
