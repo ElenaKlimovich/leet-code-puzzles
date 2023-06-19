@@ -45,6 +45,19 @@ public class LeetCodeSolutionEasy5 {
         }
     }
 
+    // https://leetcode.com/problems/find-the-highest-altitude/
+    public int largestAltitude(int[] gain) {
+        int curr = 0;
+        int max = 0;
+        for (int i = 0; i < gain.length; i++) {
+            curr += gain[i];
+            if(max < curr)
+                max = curr;
+        }
+
+        return max;
+    }
+
     // https://leetcode.com/problems/minimum-absolute-difference-in-bst/
     int res = Integer.MAX_VALUE;
     Integer prev;
