@@ -14,8 +14,29 @@ public class LeetCodeSolutionMedium7 {
 //            System.out.println();
 //        }
 
-        System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1)); // 2
+//        System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1)); // 2
 
+        List<String> strings = generateParenthesis(3);
+        System.out.println(strings);
+        System.out.println(strings.size());
+    }
+
+    // 8. https://leetcode.com/problems/generate-parentheses
+    public static List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        generator(res, "", 0, 0, n);
+        return res;
+    }
+
+    private static void generator(List<String> res, String current, int open, int close, int n) {
+        if (current.length() == 2 * n) {
+            res.add(current);
+            return;
+        }
+        if (open < n)
+            generator(res, current + "(", open + 1, close, n);
+        if (close < open)
+            generator(res, current + ")", open, close + 1, n);
     }
 
     //  7. https://leetcode.com/problems/3sum-closest
@@ -217,7 +238,6 @@ public class LeetCodeSolutionMedium7 {
 
 
 //    https://leetcode.com/problems/remove-nth-node-from-end-of-list
-//    https://leetcode.com/problems/generate-parentheses
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/rotate-image
