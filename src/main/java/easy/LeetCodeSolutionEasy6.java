@@ -65,7 +65,24 @@ public class LeetCodeSolutionEasy6 {
 
     }
 
-    // https://leetcode.com/problems/design-hashset
+    //  17. https://leetcode.com/problems/summary-ranges
+    public List<String> summaryRanges(int[] nums) {
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i<nums.length; i++) {
+            int n = nums[i];
+            while(i < nums.length - 1 && nums[i] + 1 == nums[i+1]) {
+                i++;
+            }
+            if(n != nums[i])
+                res.add(n + "->" + nums[i]);
+            else
+                res.add(n + "");
+        }
+        return res;
+    }
+
+
+    // 16. https://leetcode.com/problems/design-hashset
     // II
     class MyHashSet {
 
@@ -127,7 +144,7 @@ public class LeetCodeSolutionEasy6 {
 //        }
 //    }
 
-    // https://leetcode.com/problems/design-parking-system/
+    // 15. https://leetcode.com/problems/design-parking-system/
     class ParkingSystem {
 
         int big;
