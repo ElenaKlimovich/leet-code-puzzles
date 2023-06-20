@@ -246,7 +246,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/simplify-path
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
-//    https://leetcode.com/problems/summary-ranges
 //    https://leetcode.com/problems/perfect-squares
 //    https://leetcode.com/problems/zigzag-iterator
 //    https://leetcode.com/problems/reconstruct-itinerary
