@@ -21,6 +21,23 @@ public class LeetCodeSolutionMedium7 {
         System.out.println(strings.size());
     }
 
+
+    // 9. https://leetcode.com/problems/perfect-squares
+    public int numSquares(int n) {
+        int[] arr = new int[n+1];
+        arr[0] = 0;
+        for (int i=1; i<=n; i++) {
+            arr[i] = i;
+            for (int j=1; j*j<=i; j++) {
+                int temp = 1 + arr[i - j*j];
+                if(arr[i] > temp)
+                    arr[i] = temp;
+            }
+        }
+
+        return arr[n];
+    }
+
     // 8. https://leetcode.com/problems/generate-parentheses
     public static List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
@@ -246,7 +263,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/simplify-path
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
-//    https://leetcode.com/problems/perfect-squares
 //    https://leetcode.com/problems/zigzag-iterator
 //    https://leetcode.com/problems/reconstruct-itinerary
 //    https://leetcode.com/problems/insert-delete-getrandom-o1
