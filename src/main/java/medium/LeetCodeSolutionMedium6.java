@@ -34,8 +34,34 @@ public class LeetCodeSolutionMedium6 {
 
 //        System.out.println(equalPairs(new int[][]{{3, 2, 1}, {1, 7, 6}, {2, 7, 7}})); // 2
 //        System.out.println(equalPairs(new int[][]{{3,1,2,2}, {1,4,4,4}, {2,4,2,2}, {2,5,2,2}})); // 3
-        System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}})); // 3
+//        System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}})); // 3
+
+        System.out.println(longestArithSeqLength(new int[]{3, 6, 9, 12})); // 4
     }
+
+
+    // https://leetcode.com/problems/longest-arithmetic-subsequence/
+    public static int longestArithSeqLength(int[] nums) {
+        int l = nums.length;
+        int res = 1;
+        Map<Integer, Integer>[] freqMap = new HashMap[l];
+        for (int i=0; i<l; i++) {
+            freqMap[i] = new HashMap<>();
+            Map<Integer, Integer> currMap = freqMap[i];
+            int currN = nums[i];
+            for ( int j=0; j<i; j++) {
+                Map<Integer, Integer> prev = freqMap[j];
+                int diff = currN - nums[j];
+                int freq = prev.getOrDefault(diff, 0) + 1;
+                currMap.put(diff, freq);
+                freqMap[i] = currMap;
+                res = Math.max(res, freq);
+            }
+        }
+
+        return res + 1;
+    }
+
 
     // https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
 
