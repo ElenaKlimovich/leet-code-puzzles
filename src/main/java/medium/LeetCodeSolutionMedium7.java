@@ -45,6 +45,22 @@ public class LeetCodeSolutionMedium7 {
         return dummy.next;
     }
 
+    // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+    public ListNode deleteMiddle(ListNode head) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode slow = dummy, fast = dummy;
+
+        while (fast != null && fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+
     // 9. https://leetcode.com/problems/perfect-squares
     public int numSquares(int n) {
         int[] arr = new int[n+1];
