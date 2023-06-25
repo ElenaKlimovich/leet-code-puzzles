@@ -22,6 +22,29 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
+    // 10. https://leetcode.com/problems/remove-nth-node-from-end-of-list
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode slow = dummy, fast = dummy;
+
+        //the gap between slow and fast = n
+        for (int i=0; i<n+1; i++) {
+            fast = fast.next;
+        }
+
+        //Move fast & slow to the end, maintaining the gap
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        //Skip the desired node
+        slow.next = slow.next.next;
+
+        return dummy.next;
+    }
+
     // 9. https://leetcode.com/problems/perfect-squares
     public int numSquares(int n) {
         int[] arr = new int[n+1];
@@ -254,7 +277,6 @@ public class LeetCodeSolutionMedium7 {
     }
 
 
-//    https://leetcode.com/problems/remove-nth-node-from-end-of-list
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/rotate-image
