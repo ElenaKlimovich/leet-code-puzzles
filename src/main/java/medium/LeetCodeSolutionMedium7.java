@@ -16,11 +16,40 @@ public class LeetCodeSolutionMedium7 {
 
 //        System.out.println(threeSumClosest(new int[]{-1, 2, 1, -4}, 1)); // 2
 
-        List<String> strings = generateParenthesis(3);
-        System.out.println(strings);
-        System.out.println(strings.size());
+//        List<String> strings = generateParenthesis(3);
+
+//        System.out.println(checkInclusion("ab", "eidbaooo")); // true
+//        System.out.println(checkInclusion("ab", "eidboaoo")); // false
+//        System.out.println(checkInclusion("adc", "dcda")); // true
+//        System.out.println(checkInclusion("hello", "ooolleoooleh")); // false
+        System.out.println(checkInclusion("ab", "eidbaooo")); // true
+
     }
 
+
+    // 11. https://leetcode.com/problems/permutation-in-string
+    public static boolean checkInclusion(String s1, String s2) {
+
+        int l1 = s1.length();
+        int l2 = s2.length();
+
+        int[] c1 = new int[26];
+
+        for (int i=0; i<l1; i++)
+            c1[s1.charAt(i) - 'a']++;
+
+        for (int i = 0; i<=l2-l1; i++) {
+            int[] c2 = new int[26];
+            String window = s2.substring(i, i + l1);
+            for (int j=0; j<l1; j++)
+                c2[window.charAt(j) - 'a']++;
+
+            if (Arrays.equals(c2, c1))
+                return true;
+        }
+
+        return false;
+    }
 
     // 10. https://leetcode.com/problems/remove-nth-node-from-end-of-list
     public ListNode removeNthFromEnd(ListNode head, int n) {
@@ -29,7 +58,7 @@ public class LeetCodeSolutionMedium7 {
         ListNode slow = dummy, fast = dummy;
 
         //the gap between slow and fast = n
-        for (int i=0; i<n+1; i++) {
+        for (int i = 0; i < n + 1; i++) {
             fast = fast.next;
         }
 
@@ -63,13 +92,13 @@ public class LeetCodeSolutionMedium7 {
 
     // 9. https://leetcode.com/problems/perfect-squares
     public int numSquares(int n) {
-        int[] arr = new int[n+1];
+        int[] arr = new int[n + 1];
         arr[0] = 0;
-        for (int i=1; i<=n; i++) {
+        for (int i = 1; i <= n; i++) {
             arr[i] = i;
-            for (int j=1; j*j<=i; j++) {
-                int temp = 1 + arr[i - j*j];
-                if(arr[i] > temp)
+            for (int j = 1; j * j <= i; j++) {
+                int temp = 1 + arr[i - j * j];
+                if (arr[i] > temp)
                     arr[i] = temp;
             }
         }
@@ -307,7 +336,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/serialize-and-deserialize-bst
 //    https://leetcode.com/problems/max-consecutive-ones-ii
 //    https://leetcode.com/problems/subarray-sum-equals-k
-//    https://leetcode.com/problems/permutation-in-string
 //    https://leetcode.com/problems/subarray-sums-divisible-by-k
 //    https://leetcode.com/problems/max-consecutive-ones-iii
 //    https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element
