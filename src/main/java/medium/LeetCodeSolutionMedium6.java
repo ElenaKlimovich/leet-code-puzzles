@@ -36,20 +36,44 @@ public class LeetCodeSolutionMedium6 {
 //        System.out.println(equalPairs(new int[][]{{3,1,2,2}, {1,4,4,4}, {2,4,2,2}, {2,5,2,2}})); // 3
 //        System.out.println(equalPairs(new int[][]{{3, 1, 2, 2}, {1, 4, 4, 5}, {2, 4, 2, 2}, {2, 4, 2, 2}})); // 3
 
-        System.out.println(longestArithSeqLength(new int[]{3, 6, 9, 12})); // 4
+//        System.out.println(longestArithSeqLength(new int[]{3, 6, 9, 12})); // 4
+
+//        System.out.println(kSmallestPairs(new int[]{1,7,11}, new int[]{2,4,6}, 3)); // [[1,2],[1,4],[1,6]]
+//        System.out.println(kSmallestPairs(new int[]{1,2,2}, new int[]{1,1,2}, 2)); // [[1,2],[1,4],[1,6]]
+        System.out.println(kSmallestPairs(new int[]{1, 2}, new int[]{3}, 2)); // [[1,2],[1,4],[1,6]]
     }
 
+
+    // https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
+    public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+
+        List<List<Integer>> result = new ArrayList<>();
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] + a[1] - b[0] - b[1]);
+
+        for (int i = 0; i < nums1.length && i < k; i++)
+            pq.offer(new int[]{nums1[i], nums2[0], 0});
+
+        while (k-- > 0 && !pq.isEmpty()) {
+            int[] cur = pq.poll();
+            result.add(List.of(cur[0], cur[1]));
+            if (cur[2] == nums2.length - 1)
+                continue;
+            pq.offer(new int[]{cur[0], nums2[cur[2] + 1], cur[2] + 1});
+        }
+
+        return result;
+    }
 
     // https://leetcode.com/problems/longest-arithmetic-subsequence/
     public static int longestArithSeqLength(int[] nums) {
         int l = nums.length;
         int res = 1;
         Map<Integer, Integer>[] freqMap = new HashMap[l];
-        for (int i=0; i<l; i++) {
+        for (int i = 0; i < l; i++) {
             freqMap[i] = new HashMap<>();
             Map<Integer, Integer> currMap = freqMap[i];
             int currN = nums[i];
-            for ( int j=0; j<i; j++) {
+            for (int j = 0; j < i; j++) {
                 Map<Integer, Integer> prev = freqMap[j];
                 int diff = currN - nums[j];
                 int freq = prev.getOrDefault(diff, 0) + 1;
