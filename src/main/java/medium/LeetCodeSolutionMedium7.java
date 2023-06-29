@@ -22,10 +22,26 @@ public class LeetCodeSolutionMedium7 {
 //        System.out.println(checkInclusion("ab", "eidboaoo")); // false
 //        System.out.println(checkInclusion("adc", "dcda")); // true
 //        System.out.println(checkInclusion("hello", "ooolleoooleh")); // false
-        System.out.println(checkInclusion("ab", "eidbaooo")); // true
+//        System.out.println(checkInclusion("ab", "eidbaooo")); // true
 
+        System.out.println(simplifyPath("/home//foo/")); // /home/foo
     }
 
+
+    // 12. https://leetcode.com/problems/simplify-path
+    public static String simplifyPath(String path) {
+//        Deque<String> stack = new LinkedList<>();
+        Stack<String> stack = new Stack<>();
+        String[] dirs = path.split("/");
+        for (String dir : dirs) {
+            if (!stack.isEmpty() && dir.equals(".."))
+                stack.pop();
+            else if (!dir.equals("") && !dir.equals(".") && !dir.equals(".."))
+                stack.push(dir);
+        }
+
+        return "/" + String.join("/", stack);
+    }
 
     // 11. https://leetcode.com/problems/permutation-in-string
     public static boolean checkInclusion(String s1, String s2) {
@@ -327,7 +343,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/rotate-image
 //    https://leetcode.com/problems/group-anagrams
 //    https://leetcode.com/problems/merge-intervals
-//    https://leetcode.com/problems/simplify-path
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
 //    https://leetcode.com/problems/zigzag-iterator
