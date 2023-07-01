@@ -24,7 +24,29 @@ public class LeetCodeSolutionMedium7 {
 //        System.out.println(checkInclusion("hello", "ooolleoooleh")); // false
 //        System.out.println(checkInclusion("ab", "eidbaooo")); // true
 
-        System.out.println(simplifyPath("/home//foo/")); // /home/foo
+//        System.out.println(simplifyPath("/home//foo/")); // /home/foo
+
+        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 3}, new int[]{2, 4}, new int[]{5, 8}})));
+        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 5}, new int[]{0, 4}})));
+    }
+
+
+    // 13. https://leetcode.com/problems/merge-intervals
+    public static int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, Comparator.comparingInt(arr -> arr[0]));
+        List<int[]> res = new ArrayList<>();
+        int[] newInterval = intervals[0];
+        res.add(newInterval);
+        for (int[] current : intervals) {
+            if (newInterval[1] >= current[0])
+                newInterval[1] = Math.max(newInterval[1], current[1]);
+            else {
+                newInterval = current;
+                res.add(newInterval);
+            }
+        }
+
+        return res.toArray(new int[res.size()][]);
     }
 
 
@@ -51,13 +73,13 @@ public class LeetCodeSolutionMedium7 {
 
         int[] c1 = new int[26];
 
-        for (int i=0; i<l1; i++)
+        for (int i = 0; i < l1; i++)
             c1[s1.charAt(i) - 'a']++;
 
-        for (int i = 0; i<=l2-l1; i++) {
+        for (int i = 0; i <= l2 - l1; i++) {
             int[] c2 = new int[26];
             String window = s2.substring(i, i + l1);
-            for (int j=0; j<l1; j++)
+            for (int j = 0; j < l1; j++)
                 c2[window.charAt(j) - 'a']++;
 
             if (Arrays.equals(c2, c1))
@@ -342,7 +364,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/rotate-image
 //    https://leetcode.com/problems/group-anagrams
-//    https://leetcode.com/problems/merge-intervals
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
 //    https://leetcode.com/problems/zigzag-iterator
