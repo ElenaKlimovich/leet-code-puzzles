@@ -26,10 +26,26 @@ public class LeetCodeSolutionMedium7 {
 
 //        System.out.println(simplifyPath("/home//foo/")); // /home/foo
 
-        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 3}, new int[]{2, 4}, new int[]{5, 8}})));
-        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 5}, new int[]{0, 4}})));
+//        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 3}, new int[]{2, 4}, new int[]{5, 8}})));
+//        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 5}, new int[]{0, 4}})));
     }
 
+
+    // 14. https://leetcode.com/problems/group-anagrams
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> groups = new HashMap<>();
+
+        for (String str : strs) {
+            char[] letters = str.toCharArray();
+            Arrays.sort(letters);
+            String keyAnagram = String.valueOf(letters);
+            if (!groups.containsKey(keyAnagram))
+                groups.put(keyAnagram, new ArrayList<>());
+            groups.get(keyAnagram).add(str);
+        }
+
+        return new ArrayList<>(groups.values());
+    }
 
     // 13. https://leetcode.com/problems/merge-intervals
     public static int[][] merge(int[][] intervals) {
@@ -363,7 +379,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/rotate-image
-//    https://leetcode.com/problems/group-anagrams
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/evaluate-reverse-polish-notation
 //    https://leetcode.com/problems/zigzag-iterator
