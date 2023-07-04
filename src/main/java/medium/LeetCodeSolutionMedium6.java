@@ -40,9 +40,24 @@ public class LeetCodeSolutionMedium6 {
 
 //        System.out.println(kSmallestPairs(new int[]{1,7,11}, new int[]{2,4,6}, 3)); // [[1,2],[1,4],[1,6]]
 //        System.out.println(kSmallestPairs(new int[]{1,2,2}, new int[]{1,1,2}, 2)); // [[1,2],[1,4],[1,6]]
-        System.out.println(kSmallestPairs(new int[]{1, 2}, new int[]{3}, 2)); // [[1,2],[1,4],[1,6]]
+//        System.out.println(kSmallestPairs(new int[]{1, 2}, new int[]{3}, 2)); // [[1,2],[1,4],[1,6]]
+
+        System.out.println(singleNumber(new int[]{2, 2, 3, 2}));
     }
 
+    // https://leetcode.com/problems/single-number-ii/
+    public static int singleNumber(int[] nums) {
+        Map<Integer, Integer> fr = new HashMap<>();
+        for (int num : nums) {
+            Integer frNum = fr.getOrDefault(num, 0);
+            if (frNum < 2)
+                fr.put(num, frNum+1);
+            else
+                fr.remove(num);
+        }
+
+        return fr.keySet().iterator().next();
+    }
 
     // https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
     public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
