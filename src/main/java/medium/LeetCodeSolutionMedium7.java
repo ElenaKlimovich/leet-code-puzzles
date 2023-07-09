@@ -28,6 +28,38 @@ public class LeetCodeSolutionMedium7 {
 
 //        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 3}, new int[]{2, 4}, new int[]{5, 8}})));
 //        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 5}, new int[]{0, 4}})));
+
+        System.out.println(evalRPN(new String[]{"4","13","5","/","+"})); // 6
+    }
+
+
+    // 15. https://leetcode.com/problems/evaluate-reverse-polish-notation
+    public static int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for (String token : tokens) {
+            if (!Set.of("+", "-", "*", "/").contains(token))
+                stack.push(Integer.parseInt(token));
+            else {
+                int b = stack.pop();
+                int a = stack.pop();
+                System.out.println(a + " " + token + " " + b);
+                stack.push(calculateRes(a, b, token));
+            }
+        }
+        return stack.pop();
+    }
+
+    private static int calculateRes(int a, int b, String operation) {
+        switch (operation) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "*":
+                return a * b;
+            default:
+                return a / b;
+        }
     }
 
 
@@ -380,7 +412,6 @@ public class LeetCodeSolutionMedium7 {
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/rotate-image
 //    https://leetcode.com/problems/lru-cache
-//    https://leetcode.com/problems/evaluate-reverse-polish-notation
 //    https://leetcode.com/problems/zigzag-iterator
 //    https://leetcode.com/problems/reconstruct-itinerary
 //    https://leetcode.com/problems/insert-delete-getrandom-o1
