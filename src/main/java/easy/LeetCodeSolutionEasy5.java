@@ -30,6 +30,15 @@ public class LeetCodeSolutionEasy5 {
 //        System.out.println(buddyStrings("abcd", "badc"));
         System.out.println(buddyStrings("ab", "ba"));
     }
+    
+    // https://leetcode.com/problems/minimum-depth-of-binary-tree
+    public int minDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+        return (left == 0 || right == 0) ? left + right + 1 : Math.min(left, right) + 1;
+    }
 
     // https://leetcode.com/problems/buddy-strings/
     public static boolean buddyStrings(String s, String goal) {
@@ -57,25 +66,6 @@ public class LeetCodeSolutionEasy5 {
                 && s.charAt(swap.get(1)) == goal.charAt(swap.get(0));
     }
 
-
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode() {
-        }
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 
     // https://leetcode.com/problems/find-the-highest-altitude/
     public int largestAltitude(int[] gain) {
