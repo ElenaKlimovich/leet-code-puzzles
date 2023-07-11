@@ -1,6 +1,7 @@
 package medium;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LeetCodeSolutionMedium7 {
 
@@ -29,9 +30,42 @@ public class LeetCodeSolutionMedium7 {
 //        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 3}, new int[]{2, 4}, new int[]{5, 8}})));
 //        System.out.println(Arrays.deepToString(merge(new int[][]{new int[]{1, 5}, new int[]{0, 4}})));
 
-        System.out.println(evalRPN(new String[]{"4","13","5","/","+"})); // 6
+//        System.out.println(evalRPN(new String[]{"4", "13", "5", "/", "+"})); // 6
+
+        rotate(new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9}});
     }
 
+
+    // 16. https://leetcode.com/problems/rotate-image
+    public static void rotate(int[][] matrix) {
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        List<List<Integer>> temp = new ArrayList<>();
+        for (int[] line : matrix) {
+            temp.add(Arrays.stream(line).boxed().collect(Collectors.toList()));
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                matrix[i][j] = temp.get(matrix.length-j-1).get(i);
+            }
+        }
+
+        System.out.println(" ---------- ");
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     // 15. https://leetcode.com/problems/evaluate-reverse-polish-notation
     public static int evalRPN(String[] tokens) {
@@ -410,7 +444,6 @@ public class LeetCodeSolutionMedium7 {
 
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
 //    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
-//    https://leetcode.com/problems/rotate-image
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/zigzag-iterator
 //    https://leetcode.com/problems/reconstruct-itinerary
