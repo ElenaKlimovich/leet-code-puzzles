@@ -35,6 +35,24 @@ public class LeetCodeSolutionMedium7 {
         rotate(new int[][]{new int[]{1, 2, 3}, new int[]{4, 5, 6}, new int[]{7, 8, 9}});
     }
 
+    // 17. https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
+    public int[] searchRange(int[] nums, int target) {
+        List<Integer> positions = new ArrayList<>();
+        boolean found = false;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                positions.add(i);
+                found = true;
+            } else {
+                if (found)
+                    break;
+            }
+        }
+
+        return positions.size() > 0 ?
+                new int[]{positions.get(0), positions.get(positions.size() - 1)} :
+                new int[]{-1, -1};
+    }
 
     // 16. https://leetcode.com/problems/rotate-image
     public static void rotate(int[][] matrix) {
@@ -53,7 +71,7 @@ public class LeetCodeSolutionMedium7 {
 
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
-                matrix[i][j] = temp.get(matrix.length-j-1).get(i);
+                matrix[i][j] = temp.get(matrix.length - j - 1).get(i);
             }
         }
 
@@ -443,7 +461,6 @@ public class LeetCodeSolutionMedium7 {
 
 
 //    https://leetcode.com/problems/search-in-rotated-sorted-array
-//    https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array
 //    https://leetcode.com/problems/lru-cache
 //    https://leetcode.com/problems/zigzag-iterator
 //    https://leetcode.com/problems/reconstruct-itinerary
