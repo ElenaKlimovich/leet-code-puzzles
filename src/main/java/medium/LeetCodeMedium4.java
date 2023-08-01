@@ -18,6 +18,25 @@ public class LeetCodeMedium4 {
         minimumDeleteSum("delete", "leet"); //403 ; let
     }
 
+    // https://leetcode.com/problems/combinations
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<>();
+        createCombinations(1, n, k, new ArrayList<>(), result);
+        return result;
+    }
+
+    private void createCombinations(int start, int n, int k, List<Integer> current, List<List<Integer>>result) {
+        if(k == 0) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        for(int i=start; i<=n; i++) {
+            current.add(i);
+            createCombinations(i+1, n, k-1, current, result);
+            current.remove(current.size()-1);
+        }
+    }
+
     // https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
     public static int minimumDeleteSum(String s1, String s2) {
         int n1 = s1.length();
