@@ -13,7 +13,36 @@ public class LeetCodeMedium4 {
 //        System.out.println(spiralOrder(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}})); // [1,2,3,6,9,8,7,4,5]
 //        System.out.println(spiralOrder(new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}})); // [1,2,3,4,8,12,11,10,9,5,6,7]
 //        System.out.println(Arrays.deepToString(generateMatrix(3))); // [[1,2,3],[8,9,4],[7,6,5]]
-        System.out.println(Arrays.deepToString(generateMatrix(4)));
+//        System.out.println(Arrays.deepToString(generateMatrix(4)));
+
+        minimumDeleteSum("delete", "leet"); //403 ; let
+    }
+
+    // https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+    public static int minimumDeleteSum(String s1, String s2) {
+        int n1 = s1.length();
+        int n2 = s2.length();
+        int[][] dp = new int[n1 + 1][n2 + 1];
+
+        for (int i = 1; i<= n1; i++)
+            dp[i][0] = dp[i - 1][0] + s1.charAt(i-1);
+
+        for (int j = 1; j<= n2; j++)
+            dp[0][j] = dp[0][j - 1] + s2.charAt(j-1);
+
+        for (int i = 1; i<= n1; i++) {
+            for (int j = 1; j <= n2; j++) {
+                if (s1.charAt(i-1) == s2.charAt(j-1)) {
+                    dp[i][j] = dp[i-1][j-1];
+                } else {
+                    int a = dp[i-1][j] + s1.charAt(i-1);
+                    int b = dp[i][j-1] + s2.charAt(j-1);
+                    dp[i][j] = Math.min(a, b);
+                }
+            }
+        }
+
+        return dp[n1][n2];
     }
 
     // https://leetcode.com/problems/spiral-matrix-ii/
