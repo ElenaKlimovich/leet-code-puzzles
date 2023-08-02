@@ -15,7 +15,31 @@ public class LeetCodeMedium4 {
 //        System.out.println(Arrays.deepToString(generateMatrix(3))); // [[1,2,3],[8,9,4],[7,6,5]]
 //        System.out.println(Arrays.deepToString(generateMatrix(4)));
 
-        minimumDeleteSum("delete", "leet"); //403 ; let
+//        minimumDeleteSum("delete", "leet"); //403 ; let
+
+        permute(new int[]{1,2}); // [1,2], [2,1]
+    }
+
+    // https://leetcode.com/problems/permutations
+    public static List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        createPermutation(new ArrayList<>(), result, nums);
+        return result;
+    }
+
+    private static void createPermutation(List<Integer> current, List<List<Integer>> res, int[] nums) {
+        if(current.size() == nums.length) {
+            res.add(new ArrayList<>(current));
+            return;
+        }
+
+        for (int num : nums) {
+            if (!current.contains(num)) {
+                current.add(num);
+                createPermutation(current, res, nums);
+                current.remove(current.size() - 1);
+            }
+        }
     }
 
     // https://leetcode.com/problems/combinations
