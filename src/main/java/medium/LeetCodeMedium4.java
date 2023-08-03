@@ -3,8 +3,10 @@ package medium;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LeetCodeMedium4 {
     public static void main(String[] args) {
@@ -18,6 +20,46 @@ public class LeetCodeMedium4 {
 //        minimumDeleteSum("delete", "leet"); //403 ; let
 
         permute(new int[]{1,2}); // [1,2], [2,1]
+    }
+
+
+    // https://leetcode.com/problems/letter-combinations-of-a-phone-number
+    public static List<String> letterCombinations(String digits) {
+        if (digits.length()==0)
+            return List.of();
+        int[] numbers = new int[digits.length()];
+        for (int i=0; i<numbers.length; i++) {
+            numbers[i] = digits.charAt(i) - '0';
+        }
+
+        List<String> letters = new ArrayList<>();
+        for (char c: digits.toCharArray()) {
+            letters.add(phoneButtons.get(c - '0'));
+        }
+
+        List<String> result = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+//        createCombinations(result, letters);
+        createCombinations(result, numbers, current, 0);
+        return result;
+    }
+
+    private static Map<Integer, String> phoneButtons = Map.of(2, "abc", 3, "def", 4, "ghi", 5, "jkl", 6, "mno", 7, "pqrs", 8, "tuv", 9, "wxyz");
+
+    private static void createCombinations(List<String> result, int[] numbers, StringBuilder current, int index) {
+
+        if(current.length() == numbers.length) {
+            result.add(current.toString());
+            return;
+        }
+
+        int digit = numbers[index];
+        String buttonLetters = phoneButtons.get(digit);
+        for (int i=0; i<buttonLetters.length(); i++) {
+            current.append(buttonLetters.charAt (i));
+            createCombinations(result, numbers, current, index+1);
+            current.deleteCharAt(current.length()-1);
+        }
     }
 
     // https://leetcode.com/problems/permutations
