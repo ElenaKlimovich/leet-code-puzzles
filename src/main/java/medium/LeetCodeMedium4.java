@@ -1,12 +1,10 @@
 package medium;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LeetCodeMedium4 {
     public static void main(String[] args) {
@@ -19,9 +17,24 @@ public class LeetCodeMedium4 {
 
 //        minimumDeleteSum("delete", "leet"); //403 ; let
 
-        permute(new int[]{1,2}); // [1,2], [2,1]
+//        permute(new int[]{1,2}); // [1,2], [2,1]
+
+        System.out.println(wordBreak("leetcode", List.of("leet","code"))); // true
+
     }
 
+    // https://leetcode.com/problems/word-break
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        int n = s.length();
+        boolean[] checker = new boolean[n+1];
+        checker[n] = true;
+        for(int i=n-1; i>=0; i--) {
+            for(int j=i+1; j<=n && !checker[i]; j++) {
+                checker[i] = checker[j] && wordDict.contains(s.substring(i,j));
+            }
+        }
+        return checker[0];
+    }
 
     // https://leetcode.com/problems/letter-combinations-of-a-phone-number
     public static List<String> letterCombinations(String digits) {
