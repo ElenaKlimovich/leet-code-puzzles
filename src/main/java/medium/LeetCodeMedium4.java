@@ -23,6 +23,34 @@ public class LeetCodeMedium4 {
 
     }
 
+    // https://leetcode.com/problems/unique-binary-search-trees-ii
+    public List<TreeNode> generateTrees(int n) {
+        return generate(1, n);
+    }
+
+    private List<TreeNode> generate(int s, int e) {
+        List<TreeNode> result = new ArrayList<>();
+        if(s > e) {
+            result.add(null);
+            return result;
+        }
+
+        for(int i=s; i<=e; i++) {
+            List<TreeNode> leftChildren = generate(s, i-1);
+            List<TreeNode> rightChildren = generate(i+1, e);
+
+            for (TreeNode leftTree: leftChildren) {
+                for (TreeNode rightTree: rightChildren) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = leftTree;
+                    root.right = rightTree;
+                    result.add(root);
+                }
+            }
+        }
+        return result;
+    }
+
     // https://leetcode.com/problems/word-break
     public static boolean wordBreak(String s, List<String> wordDict) {
         int n = s.length();
