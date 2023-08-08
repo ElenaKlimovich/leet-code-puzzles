@@ -19,8 +19,30 @@ public class LeetCodeMedium4 {
 
 //        permute(new int[]{1,2}); // [1,2], [2,1]
 
-        System.out.println(wordBreak("leetcode", List.of("leet","code"))); // true
+//        System.out.println(wordBreak("leetcode", List.of("leet","code"))); // true
 
+        System.out.println(search(new int[]{4, 5, 6, 7, 0, 1, 2}, 0)); // O(log n);  4
+
+    }
+
+    // https://leetcode.com/problems/search-in-rotated-sorted-array/
+    public static int search(int[] nums, int target) {
+        int start = 0, end = nums.length - 1;
+        while(start <= end) {
+            int m = start + (end - start) / 2;
+            int mid = nums[m];
+
+            if ((mid < nums[0]) != (target < nums[0])) {
+                mid = target < nums[0] ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }
+            if (target > mid)
+                start = m + 1;
+            else if (target < mid)
+                end = m - 1;
+            else
+                return m;
+        }
+        return -1;
     }
 
     // https://leetcode.com/problems/unique-binary-search-trees-ii
