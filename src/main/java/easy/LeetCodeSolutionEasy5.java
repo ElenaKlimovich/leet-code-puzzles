@@ -30,7 +30,24 @@ public class LeetCodeSolutionEasy5 {
 //        System.out.println(buddyStrings("abcd", "badc"));
         System.out.println(buddyStrings("ab", "ba"));
     }
-    
+
+    // https://leetcode.com/problems/repeated-substring-pattern
+    public boolean repeatedSubstringPattern(String s) {
+
+        int l = s.length();
+        for (int i=1; i<=l/2; i++) {
+            if(l % i == 0) {
+                String rep = s.substring(0, i);
+                int r = l / i;
+                StringBuilder sub = new StringBuilder();
+                sub.append(rep.repeat(r));
+                if (s.contentEquals(sub))
+                    return true;
+            }
+        }
+        return false;
+    }
+
     // https://leetcode.com/problems/minimum-depth-of-binary-tree
     public int minDepth(TreeNode root) {
         if (root == null)
