@@ -45,6 +45,19 @@ public class LeetCodeSolutionMedium6 {
         System.out.println(singleNumber(new int[]{2, 2, 3, 2}));
     }
 
+    // https://leetcode.com/problems/maximum-length-of-pair-chain/submissions/
+    public int findLongestChain(int[][] pairs) {
+        Arrays.sort(pairs, Comparator.comparingInt(arr -> arr[1]));
+        int[] start = pairs[0];
+        int n = 1;
+        for (int[] next : pairs) {
+            if (next[0] > start[1]) {
+                n++;
+                start = next;
+            }
+        }
+        return n;
+    }
 
     // https://leetcode.com/problems/minimum-size-subarray-sum/
     public int minSubArrayLen(int target, int[] nums) {
