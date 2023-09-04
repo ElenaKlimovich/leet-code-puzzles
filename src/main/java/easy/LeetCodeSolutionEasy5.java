@@ -31,6 +31,22 @@ public class LeetCodeSolutionEasy5 {
         System.out.println(buddyStrings("ab", "ba"));
     }
 
+    // https://leetcode.com/problems/linked-list-cycle
+    public boolean hasCycle(ListNode head) {
+        if(head == null) {
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
+    }
     // https://leetcode.com/problems/repeated-substring-pattern
     public boolean repeatedSubstringPattern(String s) {
 
