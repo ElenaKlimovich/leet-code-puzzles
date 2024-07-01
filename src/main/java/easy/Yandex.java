@@ -3,6 +3,7 @@ package easy;
 import java.util.*;
 
 public class Yandex {
+
     public static void main(String[] args) {
 //        sortVowels("lEetcOde");
         countNicePairs(new int[]{13,10,35,24,76}); // 4
@@ -140,7 +141,6 @@ public class Yandex {
 
         return counterResult;
     }
-
 
     public static int countPalindromicTime0(int n, int m) {
         int h = 1;
