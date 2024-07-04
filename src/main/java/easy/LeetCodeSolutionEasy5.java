@@ -68,8 +68,8 @@ public class LeetCodeSolutionEasy5 {
     public int minDepth(TreeNode root) {
         if (root == null)
             return 0;
-        int left = minDepth(root.left);
-        int right = minDepth(root.right);
+        int left = minDepth(root.leftNode);
+        int right = minDepth(root.rightNode);
         return (left == 0 || right == 0) ? left + right + 1 : Math.min(left, right) + 1;
     }
 
@@ -121,15 +121,15 @@ public class LeetCodeSolutionEasy5 {
         if (root == null)
             return res;
 
-        getMinimumDifference(root.left);
+        getMinimumDifference(root.leftNode);
 
         if (prev != null) {
-            res = Math.min(res, root.val - prev);
+            res = Math.min(res, root.value - prev);
         }
 
-        prev = root.val;
+        prev = root.value;
 
-        getMinimumDifference(root.right);
+        getMinimumDifference(root.rightNode);
         return res;
     }
 

@@ -1,20 +1,21 @@
 package easy;
 
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+
+    int value;
+    TreeNode leftNode;
+    TreeNode rightNode;
 
     TreeNode() {
     }
 
     TreeNode(int val) {
-        this.val = val;
+        this.value = val;
     }
 
     TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
+        this.value = val;
+        this.leftNode = left;
+        this.rightNode = right;
     }
 }
