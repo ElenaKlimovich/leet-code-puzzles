@@ -22,8 +22,9 @@ public class MyTestClass {
         list.add(7);
 
         Iterator<Integer> it = new MyIterator(list.iterator());
+
         while (it.hasNext()) {
-            System.out.println(it.next());
+            System.out.println("---> " + it.next());
         }
     }
 }
