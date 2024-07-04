@@ -124,10 +124,10 @@ public class LeetCodeSolutionEasy5 {
         getMinimumDifference(root.left);
 
         if (prev != null) {
-            res = Math.min(res, root.val - prev);
+            res = Math.min(res, root.value - prev);
         }
 
-        prev = root.val;
+        prev = root.value;
 
         getMinimumDifference(root.right);
         return res;
